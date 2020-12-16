@@ -3,7 +3,7 @@
   padding: 20px;
 }
 .Post li {
-  padding: 10px 0;
+  padding: 30px 0;
   border-top: 1px solid #e8e8e8;
 }
 .Post .user {
@@ -26,4 +26,8 @@
 .Post .gravatar {
   float: left;
   margin-right: 10px;
+}
+.Post a {
+  float: right;
+  margin-left: 10px;
 }
