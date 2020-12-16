@@ -1,12 +1,7 @@
-/* footer */
-
 footer {
   margin-top: 45px;
-  padding-top: 5px;
+  padding: 20px;
   border-top: 1px solid gray;
-  color: gray;
-}
-footer a {
   color: gray;
 }
 footer small {

@@ -1,4 +1,11 @@
-/* header */
+header {
+  float: center;
+  margin-bottom: 45px;
+}
+header ul {
+  list-style: none;
+  color: gray;
+}
 
 #logo {
   float: left;

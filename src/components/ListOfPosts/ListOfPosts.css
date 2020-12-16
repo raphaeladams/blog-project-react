@@ -1,32 +1,29 @@
-/* Microposts */
-
-.microposts {
+.Post {
   list-style: none;
-  padding: 0;
+  padding: 20px;
 }
-.microposts li {
+.Post li {
   padding: 10px 0;
   border-top: 1px solid #e8e8e8;
 }
-.microposts .user {
+.Post .user {
   margin-top: 5em;
   padding-top: 0;
 }
-.microposts .content {
+.Post .content {
   display: block;
   margin-left: 60px;
 }
-.microposts .content img {
+.Post .content img {
   display: block;
   padding: 5px 0;
 }
-.microposts .timestamp {
+.Post .timestamp {
   color: gray;
   display: block;
   margin-left: 60px;
 }
-.microposts .gravatar {
+.Post .gravatar {
   float: left;
   margin-right: 10px;
-  margin-top: 5px;
 }
