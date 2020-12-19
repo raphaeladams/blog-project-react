@@ -7,12 +7,10 @@
   border-top: 1px solid #e8e8e8;
 }
 .Post .user {
-  margin-top: 5em;
   padding-top: 0;
 }
 .Post .content {
   display: block;
-  margin-left: 60px;
 }
 .Post .content img {
   display: block;
@@ -21,13 +19,7 @@
 .Post .timestamp {
   color: gray;
   display: block;
-  margin-left: 60px;
 }
 .Post .gravatar {
   float: left;
-  margin-right: 10px;
-}
-.Post a {
-  float: right;
-  margin-left: 10px;
 }
