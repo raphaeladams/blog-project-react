@@ -22,4 +22,5 @@
 }
 .Post .gravatar {
   float: left;
+  padding-right: 20px;
 }
