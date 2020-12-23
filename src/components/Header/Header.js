@@ -18,6 +18,9 @@ export default function Header() {
           <li>
             <Link to="/users">Users</Link>
           </li>
+          <li>
+            <Link to="/posts/new">New Post</Link>
+          </li>
         </ul>
       </nav>
     </header>
