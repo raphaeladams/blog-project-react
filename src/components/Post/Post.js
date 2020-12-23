@@ -3,7 +3,7 @@ import raphdp from './raphdp.png';
 import CommentForm from '../CommentForm';
 
 
-export default function Post() {
+export default function Post({post}) {
   const [commenting, setCommenting] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -15,10 +15,10 @@ export default function Post() {
         className="gravatar"
         style={{width: 120, height: 120}}/>
 
-      <div className="user">JOHN DOE</div>
+      <div className="user">{post.user.name}</div>
       <br></br>
-      <div className="content">Some test post text, nothing to see here</div>
-      <div className="timestamp">Posted 2 hours ago.</div>
+      <div className="content">{post.content}</div>
+      <div className="timestamp">Posted {post.updatedAt}</div>
       <br></br>
 
       <button

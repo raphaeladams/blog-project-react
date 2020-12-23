@@ -8,9 +8,26 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {ApolloProvider} from 'react-apollo';
+import {ApolloClient} from 'apollo-client';
+import {createHttpLink} from 'apollo-link-http';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+
+
+const link = createHttpLink({
+  uri: 'https://sample-app.myshopify.io/graphql'
+});
+
+const client = new ApolloClient({
+  link: link,
+  cache: new InMemoryCache()
+});
+
 ReactDOM.render(
   <AppProvider i18n={enTranslations}>
-    <App />,
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </AppProvider>,
   document.getElementById('root')
 );
