@@ -2,7 +2,7 @@ import React from "react";
 import './ListOfPosts.css';
 import Post from '../Post';
 import { gql } from 'apollo-boost';
-import { Query } from 'react-apollo';
+import {useQuery} from '@apollo/react-hooks';
 
 
 const POSTS_QUERY = gql`
@@ -19,21 +19,18 @@ const POSTS_QUERY = gql`
 `;
 
 export default function ListOfPosts() {
+  const {loading, error, data} = useQuery(POSTS_QUERY);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <div>Error</div>;
+
   return (
-    <Query query={POSTS_QUERY}>
-      {({loading, error, data}) => {
-        if (loading) return <div>Getting data...</div>
-        if (error) return <div>Error! :(</div>
+    <div className="Post">
+      {data.microposts.map((post => {
         return (
-          <div className="Post">
-            {data.microposts.map((post => {
-              return (
-                <li><Post post={post}/></li>
-              );
-            }))}
-          </div>
-        )
-      }}
-    </Query>
+          <li><Post post={post}/></li>
+        );
+      }))}
+    </div>
   );
 }
