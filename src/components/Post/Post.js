@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import raphdp from './raphdp.png';
+// import raphdp from './raphdp.png';
 import CommentForm from '../CommentForm';
 
 
@@ -8,12 +8,12 @@ export default function Post({post}) {
   const [liked, setLiked] = useState(false);
 
   return (
-    <micropost>
+    <div>
 
-      <img src={raphdp}
+      {/* <img src={raphdp}
         alt="display pic"
         className="gravatar"
-        style={{width: 120, height: 120}}/>
+        style={{width: 120, height: 120}}/> */}
 
       <div className="user">{post.user.name}</div>
       <br></br>
@@ -32,6 +32,6 @@ export default function Post({post}) {
       </button>
       {commenting && <CommentForm />}
       
-    </micropost>
+    </div>
   );
 }

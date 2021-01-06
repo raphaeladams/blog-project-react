@@ -8,7 +8,7 @@ import {
   Heading,
   Avatar
 } from '@shopify/polaris';
-import raphdp from './raphdp.png';
+// import raphdp from './raphdp.png';
 
 import {gql} from 'apollo-boost';
 import {useQuery} from '@apollo/react-hooks';
@@ -37,10 +37,10 @@ export default function Polaris() {
   return (
     <Page title='POLARIS'>
       <Card sectioned>
-        <Avatar
+        {/* <Avatar
           source={raphdp}
           size='large'
-        />
+        /> */}
 
         <TextContainer>
           <Heading className="user">{data.micropost.user.name}</Heading>
