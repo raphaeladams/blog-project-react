@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-// import raphdp from './raphdp.png';
+import React, { useState } from 'react';
+import raphdp from './raphdp.png';
 import CommentForm from '../CommentForm';
 
 
@@ -10,25 +10,27 @@ export default function Post({post}) {
   return (
     <div>
 
-      {/* <img src={raphdp}
-        alt="display pic"
-        className="gravatar"
-        style={{width: 120, height: 120}}/> */}
+      <img src={raphdp}
+        alt='display pic'
+        className='gravatar'
+        style={{width: 120, height: 120}}/>
 
-      <div className="user">{post.user.name}</div>
+      <div className='user'>{post.user.name}</div>
       <br></br>
-      <div className="content">{post.content}</div>
-      <div className="timestamp">Posted {post.updatedAt}</div>
+      <div className='content'>{post.content}</div>
+      <div className='timestamp'>Posted {post.updatedAt}</div>
       <br></br>
 
-      <button
+      <button 
+        name='Like'
         onClick={() => setLiked(liked ? false : true)}>
-        {liked ? "Unlike" : "Like"}
+        {liked ? 'Unlike' : 'Like'}
       </button>
       
       <button
+        name='Comment'
         onClick={() => setCommenting(commenting ? false : true)}>
-        {commenting ? "Post" : "Comment"}
+        {commenting ? 'Post' : 'Comment'}
       </button>
       {commenting && <CommentForm />}
       

@@ -1,26 +1,66 @@
 import React from 'react';
 import {mount} from '@shopify/react-testing';
 import Post from '../Post';
-import {createGraphQLFactory} from '@shopify/graphql-testing';
+import CommentForm from '../../CommentForm';
 
-// const createGraphQL = createGraphQLFactory({
-//   unionOrIntersectionTypes: [],
-// });
 
 const fakePost = {
-  content: "Dignissimos tempore necessitatibus cum fugit.",
-  updatedAt: "2020-12-02T15:37:21Z",
+  content: 'Dignissimos tempore necessitatibus cum fugit.',
+  updatedAt: '2020-12-02T15:37:21Z',
   user: {
-    name: "Example User",
-    email: "example@railstutorial.org"
+    name: 'Example User',
+    email: 'example@railstutorial.org'
   }
 };
 
 describe(('<Post />'), () => {
-  it(('toggles from unliked to liked'), () => {
+  it(('shows correct username'), () => {
     const wrapper = mount(<Post post={fakePost} />);
-    expect(wrapper.find('button').text()).toBe('Unlike');
-    //wrapper.find('button').trigger('onClick');
-    // expect(wrapper.find('button').text()).toBe('Unlike');
+    expect(wrapper.find('div', {className: 'user'}).text()).toBe('Example User');
+  });
+
+  it(('shows correct content'), () => {
+    const wrapper = mount(<Post post={fakePost} />);
+    expect(wrapper.find('div', {className: 'content'}).text())
+      .toBe('Dignissimos tempore necessitatibus cum fugit.');
+  });
+
+  it(('shows correct timestamp'), () => {
+    const wrapper = mount(<Post post={fakePost} />);
+    expect(wrapper.find('div', {className: 'timestamp'}).text())
+      .toBe('Posted 2020-12-02T15:37:21Z');
+  });
+
+  it(('toggles Like button text when clicked'), () => {
+    const wrapper = mount(<Post post={fakePost} />);
+    expect(wrapper.find('button', {name: 'Like'}).text()).toBe('Like');
+
+    wrapper.find('button', {name: 'Like'}).trigger('onClick');
+    expect(wrapper.find('button', {name: 'Like'}).text()).toBe('Unlike');
+
+    wrapper.find('button', {name: 'Like'}).trigger('onClick');
+    expect(wrapper.find('button', {name: 'Like'}).text()).toBe('Like');
+  });
+
+  it(('toggles Comment button text when clicked'), () => {
+    const wrapper = mount(<Post post={fakePost} />);
+    expect(wrapper.find('button', {name: 'Comment'}).text()).toBe('Comment');
+
+    wrapper.find('button', {name: 'Comment'}).trigger('onClick');
+    expect(wrapper.find('button', {name: 'Comment'}).text()).toBe('Post');
+
+    wrapper.find('button', {name: 'Comment'}).trigger('onClick');
+    expect(wrapper.find('button', {name: 'Comment'}).text()).toBe('Comment');
+  });
+
+  it(('toggles Comment form when Comment button is clicked'), () => {
+    const wrapper = mount(<Post post={fakePost} />);
+    expect(wrapper.find(CommentForm)).toBe(null);
+
+    wrapper.find('button', {name: 'Comment'}).trigger('onClick');
+    expect(wrapper.find(CommentForm)).not.toBe(null);
+
+    wrapper.find('button', {name: 'Comment'}).trigger('onClick');
+    expect(wrapper.find(CommentForm)).toBe(null);
   });
 });
