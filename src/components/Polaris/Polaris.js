@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import {
   Page,
   Card,
@@ -12,26 +12,16 @@ import raphdp from './raphdp.png';
 
 import {gql} from 'apollo-boost';
 import {useQuery} from '@apollo/react-hooks';
+import POLARIS_QUERY from './PolarisQuery';
 
-const POST_QUERY = gql`
-  query {
-    micropost (id: 1) {
-      content
-      updatedAt
-      user {
-        name
-      }
-    }
-  }
-`;
 
 export default function Polaris() {
   const [commenting, setCommenting] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  const {loading, error, data} = useQuery(POST_QUERY);
+  const {loading, error, data} = useQuery(POLARIS_QUERY);
   
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
   return (
@@ -43,19 +33,19 @@ export default function Polaris() {
         />
 
         <TextContainer>
-          <Heading className="user">{data.micropost.user.name}</Heading>
-          <p className="content">{data.micropost.content}</p>
-          <p className="timestamp">{data.micropost.updatedAt}</p>
+          <Heading className='user'>{data.micropost.user.name}</Heading>
+          <p className='content'>{data.micropost.content}</p>
+          <p className='timestamp'>{data.micropost.updatedAt}</p>
         </TextContainer>
 
         <Button
           onClick={() => setLiked(liked ? false : true)}>
-          {liked ? "Unlike" : "Like"}
+          {liked ? 'Unlike' : 'Like'}
         </Button>
         
         <Button
           onClick={() => setCommenting(commenting ? false : true)}>
-          {commenting ? "Post" : "Comment"}
+          {commenting ? 'Post' : 'Comment'}
         </Button>
         
         {commenting && <TextField

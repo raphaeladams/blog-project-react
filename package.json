@@ -4,19 +4,20 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
-    "@shopify/graphql-testing": "^4.3.0",
     "@shopify/polaris": "^5.12.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "apollo-boost": "^0.4.9",
     "babel-plugin-transform-export-extensions": "^6.22.0",
-    "graphql": "^15.4.0",
+    "graphql": "^14.3.1",
     "react": "^16.14.0",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "unfetch": "^4.2.0",
+    "waait": "^1.0.5",
     "web-vitals": "^0.2.4"
   },
   "jest": {
@@ -34,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --max-warnings 0"
   },
@@ -58,7 +59,9 @@
     ]
   },
   "devDependencies": {
+    "@apollo/react-testing": "^4.0.0",
     "@babel/preset-react": "^7.12.10",
+    "@shopify/graphql-testing": "^4.3.0",
     "@shopify/react-testing": "^2.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.0",
