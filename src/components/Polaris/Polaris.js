@@ -8,9 +8,8 @@ import {
   Heading,
   Avatar
 } from '@shopify/polaris';
-import raphdp from './raphdp.png';
+import raphdp from '../../raphdp.png';
 
-import {gql} from 'apollo-boost';
 import {useQuery} from '@apollo/react-hooks';
 import POLARIS_QUERY from './PolarisQuery';
 
@@ -21,7 +20,7 @@ export default function Polaris() {
 
   const {loading, error, data} = useQuery(POLARIS_QUERY);
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <div>Error</div>;
 
   return (

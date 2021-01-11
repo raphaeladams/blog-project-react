@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import raphdp from './raphdp.png';
+import raphdp from '../../raphdp.png';
 import CommentForm from '../CommentForm';
 
 

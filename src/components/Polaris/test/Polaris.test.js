@@ -1,12 +1,9 @@
 import React from 'react';
-import {mountWithAppProvider} from '../../../test-utilities/MountWithAppProvider';
 import wait from 'waait';
 import {act} from 'react-dom/test-utils';
 import {MockedProvider} from '@apollo/react-testing';
 import POLARIS_QUERY from '../PolarisQuery';
 import Polaris from '../Polaris';
-import CommentForm from '../../CommentForm';
-import {Button, Heading} from '@shopify/polaris';
 import { mountWithApolloProvider } from '../../../test-utilities/MountWithApolloProvider';
 
 
@@ -30,18 +27,8 @@ const mocks = [
   }
 ];
 
-
-// const fakePost = {
-//   content: 'Dignissimos tempore necessitatibus cum fugit.',
-//   updatedAt: '2020-12-02T15:37:21Z',
-//   user: {
-//     name: 'Example User',
-//     email: 'example@railstutorial.org'
-//   }
-// };
-
 describe(('<Polaris />'), () => {
-  it(('shows correct username'), async () => {
+  it(('loads a post using graphql'), async () => {
     const wrapper = mountWithApolloProvider(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Polaris />
@@ -55,32 +42,31 @@ describe(('<Polaris />'), () => {
     await wrapper.update()
     console.log(wrapper.debug())
 
-    //expect(wrapper.find(Heading, {className: 'user'}).text()).toBe('Example User');
-    expect(wrapper.find(Heading).exists()).toBe(true);
+    expect(wrapper.find(Polaris)).toBeDefined();
   });
 
-  // it(('shows correct content'), () => {
-  //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
-  //   expect(wrapper.find('p', {className: 'content'}).text())
-  //     .toBe('Dignissimos tempore necessitatibus cum fugit.');
-  // });
+  it(('toggles Like button text when clicked'), async () => {
+    const wrapper = mountWithApolloProvider(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Polaris />
+      </MockedProvider>
+    );
 
-  // it(('shows correct timestamp'), () => {
-  //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
-  //   expect(wrapper.find('p', {className: 'timestamp'}).text())
-  //     .toBe('Posted 2020-12-02T15:37:21Z');
-  // });
+    await act(async () => {
+      await wait(0);
+    })
 
-  // it(('toggles Like button text when clicked'), () => {
-  //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
-  //   expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
+    await wrapper.update()
+    console.log(wrapper.debug())
 
-  //   wrapper.find(Button, {name: 'Like'}).trigger('onClick');
-  //   expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Unlike');
+    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
 
-  //   wrapper.find(Button, {name: 'Like'}).trigger('onClick');
-  //   expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
-  // });
+    wrapper.find(Button, {name: 'Like'}).trigger('onClick');
+    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Unlike');
+
+    wrapper.find(Button, {name: 'Like'}).trigger('onClick');
+    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
+  });
 
   // it(('toggles Comment button text when clicked'), () => {
   //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
