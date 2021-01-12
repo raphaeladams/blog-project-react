@@ -24,7 +24,7 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 const link = createHttpLink({
-  uri: 'https://rails-data-project-devanandersen.myshopify.io/graphql',
+  uri: 'https://sample-app.myshopify.io/graphql',
   fetch: fetch
 })
 
@@ -45,5 +45,5 @@ export const mountWithApolloProvider = createMount({
         </PolarisTestProvider>
       </ApolloProvider>
     );
-  },
+  }
 });

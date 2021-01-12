@@ -1,10 +1,17 @@
 import React from 'react';
 import wait from 'waait';
 import {act} from 'react-dom/test-utils';
-import {MockedProvider} from '@apollo/react-testing';
+// import {MockedProvider} from '@apollo/react-testing';
+import {MockedProvider} from '@apollo/client/testing';
+import TestRenderer from 'react-test-renderer';
+
 import POLARIS_QUERY from '../PolarisQuery';
 import Polaris from '../Polaris';
 import { mountWithApolloProvider } from '../../../test-utilities/MountWithApolloProvider';
+import { mountWithGraphQL } from '../../../test-utilities/MountWithGraphQL';
+import { mount } from '@shopify/react-testing';
+import { PolarisTestProvider } from '@shopify/polaris';
+import en from '@shopify/polaris/locales/en.json';
 
 
 const mocks = [
@@ -20,19 +27,21 @@ const mocks = [
           user: {
             name: 'Example User',
             email: 'example@railstutorial.org'
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 ];
 
 describe(('<Polaris />'), () => {
   it(('loads a post using graphql'), async () => {
-    const wrapper = mountWithApolloProvider(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Polaris />
-      </MockedProvider>
+    const wrapper = mount(
+      <PolarisTestProvider i18n={en}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Polaris />
+        </MockedProvider>
+      </PolarisTestProvider>
     );
 
     await act(async () => {
@@ -45,48 +54,21 @@ describe(('<Polaris />'), () => {
     expect(wrapper.find(Polaris)).toBeDefined();
   });
 
-  it(('toggles Like button text when clicked'), async () => {
-    const wrapper = mountWithApolloProvider(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Polaris />
-      </MockedProvider>
+  it(('renders loading message'), async () => {
+    const wrapper = mountWithGraphQL(
+      <PolarisTestProvider i18n={en}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Polaris />
+        </MockedProvider>
+      </PolarisTestProvider>
     );
+    // await act(async () => {
+    //   await wait(0);
+    // })
 
-    await act(async () => {
-      await wait(0);
-    })
+    // await wrapper.update()
+    // console.log(wrapper.debug())
 
-    await wrapper.update()
-    console.log(wrapper.debug())
-
-    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
-
-    wrapper.find(Button, {name: 'Like'}).trigger('onClick');
-    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Unlike');
-
-    wrapper.find(Button, {name: 'Like'}).trigger('onClick');
-    expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
+    expect(wrapper.find(Polaris)).toContain('Loading');
   });
-
-  // it(('toggles Comment button text when clicked'), () => {
-  //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
-  //   expect(wrapper.find(Button, {name: 'Comment'}).text()).toBe('Comment');
-
-  //   wrapper.find(Button, {name: 'Comment'}).trigger('onClick');
-  //   expect(wrapper.find(Button, {name: 'Comment'}).text()).toBe('Post');
-
-  //   wrapper.find(Button, {name: 'Comment'}).trigger('onClick');
-  //   expect(wrapper.find(Button, {name: 'Comment'}).text()).toBe('Comment');
-  // });
-
-  // it(('toggles Comment form when Comment button is clicked'), () => {
-  //   const wrapper = mountWithAppProvider(<Polaris post={fakePost} />);
-  //   expect(wrapper.find(CommentForm)).toBe(null);
-
-  //   wrapper.find(Button, {name: 'Comment'}).trigger('onClick');
-  //   expect(wrapper.find(CommentForm)).not.toBe(null);
-
-  //   wrapper.find(Button, {name: 'Comment'}).trigger('onClick');
-  //   expect(wrapper.find(CommentForm)).toBe(null);
-  // });
 });

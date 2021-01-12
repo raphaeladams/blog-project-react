@@ -8,10 +8,12 @@ import enTranslations from '@shopify/polaris/locales/en.json';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import ApolloClient from 'apollo-boost';
-import {ApolloProvider} from '@apollo/react-hooks';
+// import ApolloClient from 'apollo-boost';
+// import {ApolloProvider} from '@apollo/react-hooks';
 
-import {InMemoryCache} from 'apollo-cache-inmemory';
+// import {InMemoryCache} from 'apollo-cache-inmemory';
+
+import { ApolloProvider, ApolloClient, InMemoryCache} from '@apollo/client';
 
 
 const client = new ApolloClient({

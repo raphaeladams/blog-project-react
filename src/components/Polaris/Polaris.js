@@ -15,13 +15,13 @@ import POLARIS_QUERY from './PolarisQuery';
 
 
 export default function Polaris() {
-  const [commenting, setCommenting] = useState(false);
-  const [liked, setLiked] = useState(false);
-
   const {loading, error, data} = useQuery(POLARIS_QUERY);
   
   if (loading) return <p>Loading...</p>;
   if (error) return <div>Error</div>;
+
+  const [commenting, setCommenting] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   return (
     <Page title='POLARIS'>
