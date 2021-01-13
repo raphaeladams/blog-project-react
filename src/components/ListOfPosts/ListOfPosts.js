@@ -1,7 +1,7 @@
 import React from "react";
 import './ListOfPosts.css';
 import Post from '../Post';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import POSTS_QUERY from './ListOfPostsQuery';
 
 
@@ -15,7 +15,9 @@ export default function ListOfPosts() {
     <div className="Post">
       {data.microposts.map((post) => {
         return (
-          <li><Post post={post}/></li>
+          <li key={post.id}>
+            <Post postId={post.id}/>
+          </li>
         );
       })}
     </div>

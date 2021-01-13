@@ -1,6 +1,4 @@
 import React, {useState, useCallback} from "react";
-import {useMutation} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import {
   Page,
   Card,
@@ -9,33 +7,23 @@ import {
   Button,
   Form
 } from '@shopify/polaris';
+import {useMutation} from '@apollo/client';
+import NEW_POST_MUTATION from './NewPostMutation';
 
-const ADD_POST = gql`
-mutation CreateMicropost($content: String!) {
-  createMicropost(input: {micropostRequest: {content: $content, userId: 1}})
-  {
-    micropost {
-      id,
-      content,
-      createdAt,
-      user {
-        name,
-        id
-      }
-    }
-  }
-}`;
 
 export default function NewPost() {
   const [content, setContent] = useState('');
   const handleContentChange = useCallback((value) => setContent(value), []);
   
-  const [addMicropost, {loading: mutationLoading, error: mutationError}] = useMutation(ADD_POST);
+  const [addMicropost, {loading, error, data}] = useMutation(NEW_POST_MUTATION);
 
   const handleSubmit = useCallback((_event) => {
     addMicropost({ variables: {content: content} });
     setContent('');
   }, [content, addMicropost]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <div>Error :( Please try again!</div>;
 
   return (
     <Page title='New Post'>
@@ -51,8 +39,7 @@ export default function NewPost() {
 
             <Button primary submit>Post!</Button>
 
-            {mutationLoading && <p>Loading...</p>}
-            {mutationError && <p>Error :( Please try again!</p>}
+            {data && <p>Posted!</p>}
           </FormLayout>
         </Form>
       </Card>

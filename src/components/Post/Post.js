@@ -4,11 +4,14 @@ import CommentForm from '../CommentForm';
 import POST_QUERY from './PostQuery';
 import {useQuery} from '@apollo/client';
 
-export default function Post({post}) {
+export default function Post({postId}) {
   const [commenting, setCommenting] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  const {loading, error, data} = useQuery(POST_QUERY);
+  const {loading, error, data} = useQuery(
+    POST_QUERY,
+    {variables: {id: postId}}
+  );
   
   if (loading) return <p>Loading...</p>;
   if (error) return <div>Error</div>;

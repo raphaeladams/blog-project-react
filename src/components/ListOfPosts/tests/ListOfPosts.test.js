@@ -37,12 +37,12 @@ describe('<ListOfPosts />', () => {
       </MockedProvider>
     );
 
-    await act(async () => {
-      await wait(0);
-    })
+    // await act(async () => {
+    //   await wait(0);
+    // })
 
-    await wrapper.update()
-    console.log(wrapper.debug())
+    // await wrapper.update()
+    // console.log(wrapper.debug())
     expect(wrapper.find(ListOfPosts)).toBeDefined();
   });
 });
