@@ -9,19 +9,18 @@ import {
   Avatar
 } from '@shopify/polaris';
 import raphdp from '../../raphdp.png';
-
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import POLARIS_QUERY from './PolarisQuery';
 
 
 export default function Polaris() {
+  const [commenting, setCommenting] = useState(false);
+  const [liked, setLiked] = useState(false);
+  
   const {loading, error, data} = useQuery(POLARIS_QUERY);
   
   if (loading) return <p>Loading...</p>;
   if (error) return <div>Error</div>;
-
-  const [commenting, setCommenting] = useState(false);
-  const [liked, setLiked] = useState(false);
 
   return (
     <Page title='POLARIS'>
@@ -34,15 +33,17 @@ export default function Polaris() {
         <TextContainer>
           <Heading className='user'>{data.micropost.user.name}</Heading>
           <p className='content'>{data.micropost.content}</p>
-          <p className='timestamp'>{data.micropost.updatedAt}</p>
+          <p className='timestamp'>Posted {data.micropost.updatedAt}</p>
         </TextContainer>
 
         <Button
+          name='Like'
           onClick={() => setLiked(liked ? false : true)}>
           {liked ? 'Unlike' : 'Like'}
         </Button>
         
         <Button
+          name='Comment'
           onClick={() => setCommenting(commenting ? false : true)}>
           {commenting ? 'Post' : 'Comment'}
         </Button>

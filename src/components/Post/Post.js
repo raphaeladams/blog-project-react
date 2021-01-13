@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import raphdp from '../../raphdp.png';
 import CommentForm from '../CommentForm';
-
+import POST_QUERY from './PostQuery';
+import {useQuery} from '@apollo/client';
 
 export default function Post({post}) {
   const [commenting, setCommenting] = useState(false);
   const [liked, setLiked] = useState(false);
+
+  const {loading, error, data} = useQuery(POST_QUERY);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <div>Error</div>;
 
   return (
     <div>
@@ -15,10 +21,10 @@ export default function Post({post}) {
         className='gravatar'
         style={{width: 120, height: 120}}/>
 
-      <div className='user'>{post.user.name}</div>
+      <div className='user'>{data.micropost.user.name}</div>
       <br></br>
-      <div className='content'>{post.content}</div>
-      <div className='timestamp'>Posted {post.updatedAt}</div>
+      <div className='content'>{data.micropost.content}</div>
+      <div className='timestamp'>Posted {data.micropost.updatedAt}</div>
       <br></br>
 
       <button 
