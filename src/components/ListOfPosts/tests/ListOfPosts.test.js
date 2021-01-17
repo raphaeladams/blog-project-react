@@ -1,10 +1,10 @@
 import React from 'react';
 import wait from 'waait';
 import {act} from 'react-dom/test-utils';
-import {MockedProvider} from '@apollo/react-testing';
-import POSTS_QUERY from '../ListOfPostsQuery';
+import {mount} from '@shopify/react-testing';
+import {MockedProvider} from '@apollo/client/testing';
 import ListOfPosts from '../ListOfPosts';
-import { mountWithApolloProvider } from '../../../test-utilities/MountWithApolloProvider';
+import POSTS_QUERY from '../ListOfPostsQuery';
 
 
 const mocks = [
@@ -16,11 +16,11 @@ const mocks = [
       data: {
         microposts: [
           {
-            content: 'One post of many!',
-            updatedAt: '2020-12-02T15:37:21Z',
+            id: '1',
+            content: 'You miss 100% of the shots you don\'t take - Wayne Gretzky',
+            updatedAt: '2021-01-14T15:11:33Z',
             user: {
-              name: 'Wayne Gretzky',
-              email: 'wayne@example.com'
+              name: 'Michael Scott'
             }
           }
         ]
@@ -31,18 +31,19 @@ const mocks = [
 
 describe('<ListOfPosts />', () => {
   it(('loads a list of posts using graphql'), async () => {
-    const wrapper = mountWithApolloProvider(
+    const wrapper = mount(
       <MockedProvider mocks={mocks} addTypename={false}>
         <ListOfPosts />
       </MockedProvider>
     );
 
-    // await act(async () => {
-    //   await wait(0);
-    // })
+    await act(async () => {
+      await wait(0);
+    })
 
-    // await wrapper.update()
-    // console.log(wrapper.debug())
+    await wrapper.update()
+    console.log(wrapper.debug())
+    
     expect(wrapper.find(ListOfPosts)).toBeDefined();
   });
 });

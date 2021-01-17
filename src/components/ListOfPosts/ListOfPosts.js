@@ -16,7 +16,11 @@ export default function ListOfPosts() {
       {data.microposts.map((post) => {
         return (
           <li key={post.id}>
-            <Post postId={post.id}/>
+            <Post 
+              userName={post.user.name}
+              content={post.content}
+              date={post.updatedAt}
+            />
           </li>
         );
       })}

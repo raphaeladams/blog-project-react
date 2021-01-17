@@ -1,9 +1,9 @@
 import React from 'react';
 import wait from 'waait';
 import {act} from 'react-dom/test-utils';
-import { mount } from '@shopify/react-testing';
+import {mount} from '@shopify/react-testing';
 import {MockedProvider} from '@apollo/client/testing';
-import { PolarisTestProvider } from '@shopify/polaris';
+import {PolarisTestProvider} from '@shopify/polaris';
 import POLARIS_QUERY from '../PolarisQuery';
 import Polaris from '../Polaris';
 import {Button, Heading, TextField} from '@shopify/polaris';
@@ -77,6 +77,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find(Polaris).root.element).toContainHTML('Error');
   });
@@ -95,6 +96,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find(Heading, {className: 'user'}).text()).toBe('Example User');
   });
@@ -113,6 +115,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find('p', {className: 'content'}).text())
       .toBe('Dignissimos tempore necessitatibus cum fugit.');
@@ -132,6 +135,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find('p', {className: 'timestamp'}).text())
       .toBe('Posted 2020-12-02T15:37:21Z');
@@ -151,6 +155,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find(Button, {name: 'Like'}).text()).toBe('Like');
 
@@ -175,6 +180,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find(Button, {name: 'Comment'}).text()).toBe('Comment');
 
@@ -199,6 +205,7 @@ describe(('<Polaris />'), () => {
       await wait(0);
     })
     await wrapper.update()
+    console.log(wrapper.debug())
 
     expect(wrapper.find(TextField)).toBe(null);
 

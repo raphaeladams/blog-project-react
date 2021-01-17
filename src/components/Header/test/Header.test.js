@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from '@shopify/react-testing';
 import Header from '../Header';
-import { BrowserRouter, Link } from 'react-router-dom';
+import {BrowserRouter, Link} from 'react-router-dom';
 
 
 describe(('<Header />'), () => {

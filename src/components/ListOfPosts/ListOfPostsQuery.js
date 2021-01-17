@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 
-
 export default gql`
   query {
     microposts {
@@ -9,7 +8,6 @@ export default gql`
       updatedAt
       user {
         name
-        email
       }
     }
   }

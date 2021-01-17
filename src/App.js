@@ -18,33 +18,33 @@ import './App.css';
 export default function App() {
   return (
     <Router>
-      <div>
-        <Header />
+        <div>
+          <Header />
 
-        <Switch>
-          <Route path="/polaris">
-            <Polaris />
-          </Route>
+          <Switch>
+            <Route path="/polaris">
+              <Polaris />
+            </Route>
 
-          <Route path="/about">
-            <About />
-          </Route>
+            <Route path="/about">
+              <About />
+            </Route>
 
-          <Route path="/users">
-            <Users />
-          </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
 
-          <Route path="/posts/new">
-            <NewPost />
-          </Route>
+            <Route path="/posts/new">
+              <NewPost />
+            </Route>
 
-          <Route path="/">
-            <ListOfPosts />
-          </Route>
-        </Switch>
+            <Route path="/">
+              <ListOfPosts />
+            </Route>
+          </Switch>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>      
     </Router>
   );
 }
